@@ -39,6 +39,7 @@ export function UserEditDialog({ user }: UserEditDialogProps) {
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        
       }}
     />
   )

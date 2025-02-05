@@ -27,7 +27,8 @@ export async function searchUsers(query: string): Promise<User[]> {
 }
 
 export async function addUser(data: Omit<User, 'id'>): Promise<User> {
-    const newId = crypto.randomUUID();
+    const maxId = users.length > 0 ? Math.max(...users.map(user => Number(user.id))) : 0;
+    const newId = (maxId + 1).toString(); 
     const newUser = { ...data, id: newId }
     const validatedUser = userSchema.parse(newUser)
     users.push(validatedUser)
