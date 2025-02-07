@@ -1,8 +1,6 @@
 'use server'
 
 import { PrismaClient, Prisma } from '@prisma/client'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'  // Import redirect function
 
 
 const prisma = new PrismaClient()
