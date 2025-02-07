@@ -2,6 +2,8 @@
 
 import { PrismaClient, Prisma } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'  // Import redirect function
+
 
 const prisma = new PrismaClient()
 
@@ -31,17 +33,18 @@ export async function addUser(data: { name: string; email: string; phoneNumber: 
 }
 
 // Delete user safely with error handling
+
 export async function deleteUser(id: string) {
     try {
         await prisma.user.delete({
             where: { id }
-        })
-        revalidatePath('/')
+        });
     } catch (error) {
-        console.error(`Failed to delete user with id: ${id}`, error)
-        throw new Error('User not found')
+        console.error(`Failed to delete user with id: ${id}`, error);
+        throw new Error('User not found');
     }
 }
+
 
 // Update user safely with validation
 export async function updateUser(id: string, data: Prisma.UserUpdateInput) {
